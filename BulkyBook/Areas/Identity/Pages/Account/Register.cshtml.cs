@@ -124,7 +124,7 @@ namespace BulkyBook.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    if(!await _roleManager.RoleExistsAsync(SD.Role_Admin))
+                    if (!await _roleManager.RoleExistsAsync(SD.Role_Admin))
                     {
                         await _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin));
                     }
@@ -143,7 +143,7 @@ namespace BulkyBook.Areas.Identity.Pages.Account
 
                     if (user.Role == null)
                     {
-                        await _userManager.AddToRoleAsync(user, SD.Role_User_Indi); 
+                        await _userManager.AddToRoleAsync(user, SD.Role_User_Indi);
                     }
                     else
                     {
@@ -169,7 +169,7 @@ namespace BulkyBook.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        if(user.Role == null)
+                        if (user.Role == null)
                         {
                             await _signInManager.SignInAsync(user, isPersistent: false);
                             return LocalRedirect(returnUrl);
@@ -178,6 +178,7 @@ namespace BulkyBook.Areas.Identity.Pages.Account
                         {
                             // admin is registering a new user
                             return RedirectToAction(nameof(Index), "User", new { Area = "admin" });
+                        }
                     }
                 }
                 foreach (var error in result.Errors)

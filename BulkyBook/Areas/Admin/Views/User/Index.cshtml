@@ -6,10 +6,10 @@
 <br />
 <div class="row">
     <div class="col-6">
-        <h2 class="text-primary">Company List </h2>
+        <h2 class="text-primary">Category List </h2>
     </div>
     <div class="col-6 text-right">
-        <a class="btn btn-primary" asp-action="Upsert"><i class="fas fa-plus"></i> &nbsp; Create New Company</a>
+        <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register"><i class="fas fa-plus"></i> &nbsp; Create New User</a>
     </div>
 </div>
 
@@ -20,10 +20,10 @@
             <tr class="table-info">
                 <th>Name</th>
                 <th>Address</th>
-                <th>City</th>
-                <th>State</th>
+                <th>Phone</th>
+                <th>Company</th>
                 <th>Phone Number</th>
-                <th>Authorized</th>
+                <th>Role</th>
                 <th></th>
             </tr>
         </thead>
@@ -32,5 +32,5 @@
 
 @section Scripts{
 
-    <script src="~/js/company.js"></script>
+    <script src="~/js/user.js"></script>
 }
