@@ -32,12 +32,13 @@ namespace BulkyBook.Areas.Admin.Controllers
             return View();
         }
 
-        public IActionResult Upsert(int? id)
+        public async Task<IActionResult> Upsert(int? id)
         {
+            IEnumerable<Category> categories = await _unitOfWork.Category.GetAllAsync();
             ProductVM productVM = new ProductVM()
             {
                 Product = new Product(),
-                CategoryList = _unitOfWork.Category.GetAll().Select(i => new SelectListItem { Text = i.Name, Value = i.Id.ToString(), }),
+                CategoryList = categories.Select(i => new SelectListItem { Text = i.Name, Value = i.Id.ToString(), }),
                 CoverTypeList = _unitOfWork.CoverType.GetAll().Select(i => new SelectListItem { Text = i.Name, Value = i.Id.ToString(), })
             };
             if (id == null)
@@ -57,7 +58,7 @@ namespace BulkyBook.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(ProductVM productVM)
+        public async Task<IActionResult> Upsert(ProductVM productVM)
         {
             if (ModelState.IsValid)
             {
@@ -108,7 +109,8 @@ namespace BulkyBook.Areas.Admin.Controllers
             }
             else
             {
-                productVM.CategoryList = _unitOfWork.Category.GetAll().Select(i => new SelectListItem
+                IEnumerable<Category> categories = await _unitOfWork.Category.GetAllAsync();
+                productVM.CategoryList = categories.Select(i => new SelectListItem
                 {
                     Text = i.Name,
                     Value = i.Id.ToString()

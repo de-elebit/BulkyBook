@@ -77,7 +77,7 @@ namespace BulkyBook.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var allObj = _unitOfWork.Company.GetAll(includeProperties: "Category,CoverType");
+            var allObj = _unitOfWork.Company.GetAll();
             return Json(new { data = allObj });
         }
 

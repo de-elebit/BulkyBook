@@ -20,7 +20,7 @@ namespace BulkyBook.Models
         [ForeignKey("ProductId")]
         public Product Product { get; set; }
 
-        [Range(1, 10, ErrorMessage = "올바른 갯수를 입력해주세요.")]
+        [Range(1, 10000, ErrorMessage = "올바른 갯수를 입력해주세요.")]
         public int Count { get; set; }
 
         [NotMapped]

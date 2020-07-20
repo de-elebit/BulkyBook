@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Security.Claims;
 using BulkyBook.Utility;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 
 namespace BulkyBook.Areas.Customer.Controllers
 {
@@ -21,15 +22,21 @@ namespace BulkyBook.Areas.Customer.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork, UserManager<IdentityUser> userManager)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
         {
+            //var admin = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.UserName == "admin@gmail.com") as IdentityUser;
+            //var token = await _userManager.GeneratePasswordResetTokenAsync(admin);
+            //var result = await _userManager.ResetPasswordAsync(admin, token, "Bulky123$");
+
             var productList = _unitOfWork.Product.GetAll(includeProperties: "Category,CoverType");
 
             var claimsIdentity = (ClaimsIdentity)User.Identity;
